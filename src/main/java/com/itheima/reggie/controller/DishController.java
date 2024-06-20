@@ -15,7 +15,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
@@ -126,12 +128,12 @@ public class DishController {
     }
 
     /**
-     * 根据id查询菜品信息和对应的口味信息
-     *
+     * 根据id修改菜品信息
      * @param id
+     * @param ids
      * @return
      */
-    @GetMapping("/status/{id}")
+    @PostMapping("/status/{id}")
     public R<String> updateStatus(@PathVariable int id, @RequestParam List<Long> ids){
         List<Dish> dishes = new ArrayList<>();
         for (Long dishId : ids){
@@ -143,6 +145,22 @@ public class DishController {
 
         dishService.updateBatchById(dishes);
 
+        return R.success("菜品状态修改成功");
+    }
+
+    /**
+     * 根据id删除菜品信息和对应的口味信息
+     * @param ids
+     * @return
+     */
+    @DeleteMapping
+    public R<String> remove(@RequestParam List<Long> ids){
+        Map<String, Object> dishFlavor = new HashMap<>();
+        for (Long dishId : ids){
+            dishFlavor.put("dish_id",dishId);
+            dishFlavorService.removeByMap(dishFlavor);
+        }
+        dishService.removeByIds(ids);
         return R.success("菜品状态修改成功");
     }
 }
