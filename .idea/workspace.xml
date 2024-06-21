@@ -4,9 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4b3a690e-aa58-4da8-b74a-5da8b8c0473f" name="更改" comment="菜品分类">
+    <list default="true" id="4b3a690e-aa58-4da8-b74a-5da8b8c0473f" name="更改" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/itheima/reggie/controller/SetmealDishController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/itheima/reggie/dto/SetmealDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/itheima/reggie/entity/SetmealDish.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/itheima/reggie/mapper/SetmealDishMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/itheima/reggie/service/SetmealDishService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/itheima/reggie/service/impl/SetmealDishServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/itheima/reggie/controller/DishController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/itheima/reggie/controller/DishController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/itheima/reggie/service/SetmealService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/itheima/reggie/service/SetmealService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/itheima/reggie/service/impl/SetmealServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/itheima/reggie/service/impl/SetmealServiceImpl.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -104,7 +112,7 @@
     "git-widget-placeholder": "master",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "E:/新建文件夹2/后端/take_out",
+    "last_opened_file_path": "E:/新建文件夹2/后端/take_out/src/main/java/com/itheima/reggie/dto",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -122,11 +130,11 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\新建文件夹2\后端\take_out\src\main\java\com\itheima\reggie\dto" />
+      <recent name="E:\新建文件夹2\后端\take_out\src\main\java\com\itheima\reggie\entity" />
       <recent name="E:\新建文件夹2\后端\reggie_take_out\src\main\java\com\ming\reggie\dto" />
       <recent name="E:\新建文件夹2\后端\reggie_take_out\src\main\java\com\ming\reggie\entity" />
       <recent name="E:\新建文件夹2\后端\reggie_take_out\src\main\resources\backend\page\demo" />
-      <recent name="E:\新建文件夹2\后端\reggie_take_out\src\main\java\com\ming\reggie\common" />
-      <recent name="E:\新建文件夹2\后端\reggie_take_out\src\main\resources" />
     </key>
   </component>
   <component name="RunManager">
@@ -174,7 +182,7 @@
       <workItem from="1718790499959" duration="143000" />
       <workItem from="1718790662364" duration="422000" />
       <workItem from="1718791145781" duration="205000" />
-      <workItem from="1718848197669" duration="3540000" />
+      <workItem from="1718848197669" duration="11818000" />
     </task>
     <task id="LOCAL-00001" summary="update">
       <option name="closed" value="true" />
@@ -192,7 +200,15 @@
       <option name="project" value="LOCAL" />
       <updated>1718849656274</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="菜品分类">
+      <option name="closed" value="true" />
+      <created>1718851788844</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1718851788844</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

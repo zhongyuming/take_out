@@ -38,11 +38,12 @@ public class DishController {
 
     /**
      * 新增菜品
+     *
      * @param dishDto
      * @return
      */
     @PostMapping
-    public R<String> save(@RequestBody DishDto dishDto){
+    public R<String> save(@RequestBody DishDto dishDto) {
         log.info(dishDto.toString());
 
         dishService.saveWithFlavor(dishDto);
@@ -52,43 +53,44 @@ public class DishController {
 
     /**
      * 菜品信息分页查询
+     *
      * @param page
      * @param pageSize
      * @param name
      * @return
      */
     @GetMapping("/page")
-    public R<Page> page(int page,int pageSize,String name){
+    public R<Page> page(int page, int pageSize, String name) {
 
         //构造分页构造器对象
-        Page<Dish> pageInfo = new Page<>(page,pageSize);
+        Page<Dish> pageInfo = new Page<>(page, pageSize);
         Page<DishDto> dishDtoPage = new Page<>();
 
         //条件构造器
         LambdaQueryWrapper<Dish> queryWrapper = new LambdaQueryWrapper<>();
         //添加过滤条件
-        queryWrapper.like(name != null,Dish::getName,name);
+        queryWrapper.like(name != null, Dish::getName, name);
         //添加排序条件
         queryWrapper.orderByDesc(Dish::getUpdateTime);
 
         //执行分页查询
-        dishService.page(pageInfo,queryWrapper);
+        dishService.page(pageInfo, queryWrapper);
 
         //对象拷贝
-        BeanUtils.copyProperties(pageInfo,dishDtoPage,"records");
+        BeanUtils.copyProperties(pageInfo, dishDtoPage, "records");
 
         List<Dish> records = pageInfo.getRecords();
 
         List<DishDto> list = records.stream().map((item) -> {
             DishDto dishDto = new DishDto();
 
-            BeanUtils.copyProperties(item,dishDto);
+            BeanUtils.copyProperties(item, dishDto);
 
             Long categoryId = item.getCategoryId();//分类id
             //根据id查询分类对象
             Category category = categoryService.getById(categoryId);
 
-            if(category != null){
+            if (category != null) {
                 String categoryName = category.getName();
                 dishDto.setCategoryName(categoryName);
             }
@@ -102,11 +104,12 @@ public class DishController {
 
     /**
      * 根据id查询菜品信息和对应的口味信息
+     *
      * @param id
      * @return
      */
     @GetMapping("/{id}")
-    public R<DishDto> get(@PathVariable Long id){
+    public R<DishDto> get(@PathVariable Long id) {
 
         DishDto dishDto = dishService.getByIdWithFlavor(id);
 
@@ -115,11 +118,12 @@ public class DishController {
 
     /**
      * 修改菜品
+     *
      * @param dishDto
      * @return
      */
     @PutMapping
-    public R<String> update(@RequestBody DishDto dishDto){
+    public R<String> update(@RequestBody DishDto dishDto) {
         log.info(dishDto.toString());
 
         dishService.updateWithFlavor(dishDto);
@@ -129,14 +133,15 @@ public class DishController {
 
     /**
      * 根据id修改菜品信息
+     *
      * @param id
      * @param ids
      * @return
      */
     @PostMapping("/status/{id}")
-    public R<String> updateStatus(@PathVariable int id, @RequestParam List<Long> ids){
+    public R<String> updateStatus(@PathVariable int id, @RequestParam List<Long> ids) {
         List<Dish> dishes = new ArrayList<>();
-        for (Long dishId : ids){
+        for (Long dishId : ids) {
             Dish dish = new Dish();
             dish.setId(dishId);
             dish.setStatus(id);
@@ -150,17 +155,40 @@ public class DishController {
 
     /**
      * 根据id删除菜品信息和对应的口味信息
+     *
      * @param ids
      * @return
      */
     @DeleteMapping
-    public R<String> remove(@RequestParam List<Long> ids){
+    public R<String> remove(@RequestParam List<Long> ids) {
         Map<String, Object> dishFlavor = new HashMap<>();
-        for (Long dishId : ids){
-            dishFlavor.put("dish_id",dishId);
+        for (Long dishId : ids) {
+            dishFlavor.put("dish_id", dishId);
             dishFlavorService.removeByMap(dishFlavor);
         }
         dishService.removeByIds(ids);
         return R.success("菜品状态修改成功");
+    }
+
+    /**
+     * 根据条件查询对应的菜品数据
+     * @param dish
+     * @return
+     */
+    @GetMapping("/list")
+    public R<List<Dish>> list(Dish dish){
+
+        //构造查询条件
+        LambdaQueryWrapper<Dish> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.eq(dish.getCategoryId() != null ,Dish::getCategoryId,dish.getCategoryId());
+        //添加条件，查询状态为1（起售状态）的菜品
+        queryWrapper.eq(Dish::getStatus,1);
+
+        //添加排序条件
+        queryWrapper.orderByAsc(Dish::getSort).orderByDesc(Dish::getUpdateTime);
+
+        List<Dish> list = dishService.list(queryWrapper);
+
+        return R.success(list);
     }
 }
